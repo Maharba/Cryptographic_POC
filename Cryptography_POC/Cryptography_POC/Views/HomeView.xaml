@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Cryptography_POC.Views.HomeView"
+             xmlns:local="clr-namespace:Cryptography_POC.ViewModels;assembly=Cryptography_POC"
+             xmlns:converters="clr-namespace:Cryptography_POC.Converters;assembly=Cryptography_POC"
+             xmlns:behaviors="clr-namespace:Cryptography_POC.Behaviors;assembly=Cryptography_POC">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:ItemTappedEventArgsToItemTappedConverter x:Key="ItemTappedConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.BindingContext>
+        <local:HomeViewModel />
+    </ContentPage.BindingContext>
+    <ListView
+        IsGroupingEnabled="True"
+        ItemsSource="{Binding CryptoItems}">
+        <ListView.GroupHeaderTemplate>
+            <DataTemplate>
+                <ViewCell>
+                    <Label Style="{DynamicResource TitleStyle}" Text="{Binding GroupTitle}"></Label>
+                </ViewCell>
+            </DataTemplate>
+        </ListView.GroupHeaderTemplate>
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <TextCell Text="{Binding TitleText}" Detail="{Binding Description}" />
+            </DataTemplate>
+        </ListView.ItemTemplate>
+        <ListView.Behaviors>
+            <behaviors:ListViewItemTappedBehavior
+                Command="{Binding ItemSelectedCommand}"
+                Converter="{StaticResource ItemTappedConverter}" />
+        </ListView.Behaviors>
+    </ListView>
+</ContentPage>

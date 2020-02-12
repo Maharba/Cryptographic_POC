@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModels="clr-namespace:Cryptography_POC.ViewModels;assembly=Cryptography_POC"
+             xmlns:controls="clr-namespace:Plugin.InputKit.Shared.Controls;assembly=Plugin.InputKit"
+             x:Class="Cryptography_POC.Views.AesView">
+    <ContentPage.BindingContext>
+        <viewModels:AesViewModel />
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout
+                Padding="0, 20, 0, 0">
+                <Label
+                    Margin="10, 0"
+                    Style="{DynamicResource TitleStyle}"
+                    Text="Symmetric Encryption - Rijndael"/>
+                <BoxView 
+                    Margin="10, 0"
+                    HeightRequest="1" 
+                    Color="LightGray"></BoxView>
+                <Label
+                    Padding="10"
+                    Text="Provides a managed implementation of the Advanced Encryption Standard (AES) symmetric algorithm."></Label>
+                
+                <Button
+                    Text="Download Image"
+                    Command="{Binding DownloadImageCommand}"/>
+                <ProgressBar
+                    Margin="10, 0"
+                    Progress="{Binding DownloadProgress}">
+                    <ProgressBar.Triggers>
+                        <Trigger TargetType="ProgressBar" Property="Progress" Value="0">
+                            <Setter Property="IsVisible" Value="False"></Setter>
+                        </Trigger>
+                    </ProgressBar.Triggers>
+                </ProgressBar>
+
+                <Grid 
+                    Margin="0, 0, 0, 25"
+                    Padding="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="105" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Label Text="File Name: " />
+                    <Label Grid.Column="1" Text="{Binding FileName}" />
+                    
+                    <Label Grid.Row="1" Text="Location: " />
+                    <Label Grid.Row="1" Grid.Column="1" Text="{Binding FilePath}" />
+                    
+                    <Label Grid.Row="2" Text="Is Encrypted?: "></Label>
+                    <Label Grid.Row="2" Grid.Column="1" Text="{Binding IsEncrypted}" />
+                </Grid>
+                
+                <Label 
+                    Margin="10, 0"
+                    Style="{DynamicResource TitleStyle}"
+                    Text="Key" />
+                <BoxView 
+                    Margin="10, 0"
+                    HeightRequest="1" 
+                    Color="LightGray"></BoxView>
+                
+                <Label Text="Block size" Style="{DynamicResource CaptionStyle}" Margin="10,15,0,0" />
+                <controls:RadioButtonGroupView Orientation="Horizontal" Margin="10, 0, 0, 0">
+                    <controls:RadioButton Text="32" ClickCommand="{Binding BitSelectedCommand}" CommandParameter="32" TextFontSize="Small" />
+                    <controls:RadioButton Text="64" ClickCommand="{Binding BitSelectedCommand}" CommandParameter="64" TextFontSize="Small" />
+                    <controls:RadioButton Text="128" ClickCommand="{Binding BitSelectedCommand}" CommandParameter="128" TextFontSize="Small" />
+                    <controls:RadioButton Text="256" ClickCommand="{Binding BitSelectedCommand}" CommandParameter="256" TextFontSize="Small" />
+                </controls:RadioButtonGroupView>
+                
+                <Label Text="Iterations" Style="{DynamicResource CaptionStyle}" Margin="10,15,0,0" />
+                <Entry Text="{Binding Iterations}" Keyboard="Numeric" Margin="10, 0, 0, 0" />
+                
+                <Label Text="Type a password" Style="{DynamicResource CaptionStyle}" Margin="10,15,0,0" />
+                    <Entry
+                    Margin="10, 0"
+                    WidthRequest="50"
+                    Placeholder="Password"
+                    Text="{Binding PasswordText, Mode=TwoWay}"
+                    ReturnCommand="{Binding MeasurePasswordStrengthCommand}"
+                    IsPassword="True">
+                        <Entry.Triggers>
+                            <Trigger
+                                TargetType="Entry"
+                                Property="Text"
+                                Value="">
+                                <Setter Property="BackgroundColor" Value="Red" />
+                            </Trigger>
+                        </Entry.Triggers>
+                    </Entry>
+                
+                <Frame
+                    HasShadow="True"
+                    Margin="20"
+                    Padding="15">
+                    <StackLayout>
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="Entropy: "></Label>
+                            <Label Text="{Binding Entropy}" />
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="Crack Time Format: "></Label>
+                            <Label Text="{Binding CrackTimeDisplay}"></Label>
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="Score: " />
+                            <Label Text="{Binding Score}" />
+                        </StackLayout>
+                    </StackLayout>
+                </Frame>
+                
+                <Button
+                    Text="Open File"
+                    Command="{Binding OpenFileCommand}" />
+                
+                <Button 
+                    Text="{Binding CryptoButtonText}"
+                    Command="{Binding EncryptFileCommand}"/>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

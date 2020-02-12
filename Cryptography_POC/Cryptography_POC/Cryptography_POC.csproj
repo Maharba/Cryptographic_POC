@@ -1,0 +1,30 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netstandard2.0</TargetFramework>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+        <DebugType>pdbonly</DebugType>
+        <DebugSymbols>true</DebugSymbols>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="FreshMvvm" Version="3.0.0" />
+        <PackageReference Include="Humanizer" Version="2.7.9" />
+        <PackageReference Include="Xamarin.Essentials" Version="1.3.1" />
+        <PackageReference Include="Xamarin.Forms" Version="4.4.0.991537" />
+        <PackageReference Include="Xamarin.Forms.InputKit" Version="3.1.1" />
+        <PackageReference Include="Xamarin.HotReload" Version="1.6.1" />
+        <PackageReference Include="zxcvbn-core" Version="2.1.44" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="Assets\programmingbitcoin.pdf" />
+      <EmbeddedResource Include="Assets\programmingbitcoin.pdf" />
+      <None Remove="Assets\dummy_video1.mp4" />
+      <EmbeddedResource Include="Assets\dummy_video1.mp4" />
+      <None Remove="Assets\mapping.docx" />
+      <EmbeddedResource Include="Assets\mapping.docx" />
+    </ItemGroup>
+</Project>
