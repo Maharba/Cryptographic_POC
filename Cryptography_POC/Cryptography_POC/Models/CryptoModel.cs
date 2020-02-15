@@ -11,6 +11,6 @@ namespace Cryptography_POC.Models
     public class CryptoList : ObservableCollection<CryptoModel>
     {
         public string GroupTitle { get; set; }
-        public ObservableCollection<CryptoModel> Items => this;
+        public new ObservableCollection<CryptoModel> Items => this;
     }
 }
