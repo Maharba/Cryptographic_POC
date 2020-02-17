@@ -2,11 +2,9 @@ namespace Cryptography_POC.Services
 {
     public interface ICryptoFileService
     {
-        SymmetricAlgorithms SymmetricAlgorithmType { get; set; }
-        
-        void EncryptFile(string filePath, string password, BitSizes keySize, BitSizes blockSize, int saltLength,
+        void EncryptFile(string filePath, string password, int keySize, int blockSize, int saltLength,
             int iterations);
 
-        void DecryptFile(string filePath, string password);
+        void DecryptFile(string filePath);
     }
 }

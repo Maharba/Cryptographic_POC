@@ -2,7 +2,7 @@ namespace Cryptography_POC.Services
 {
     public interface ICryptoPerformer
     {
-        void Encrypt();
-        void Decrypt();
+        byte[] Encrypt(byte[] data);
+        byte[] Decrypt(byte[] data);
     }
 }

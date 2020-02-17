@@ -2,7 +2,7 @@ namespace Cryptography_POC.Services
 {
     public interface ICryptoPlatform
     {
-        void Encrypt(ICryptoConfiguration configuration);
-        void Decrypt(ICryptoConfiguration configuration);
+        byte[] Encrypt(byte[] data, ICryptoConfiguration configuration);
+        byte[] Decrypt(byte[] data, ICryptoConfiguration configuration);
     }
 }

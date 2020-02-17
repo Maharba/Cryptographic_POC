@@ -17,7 +17,7 @@ namespace Cryptography_POC
             HotReloader.Current.Run(this); 
 #endif
 
-            MainPage = new NavigationPage(new HomeView());
+            MainPage = new NavigationPage(new AesView());
         }
 
         protected override void OnStart()

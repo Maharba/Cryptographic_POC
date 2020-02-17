@@ -3,9 +3,9 @@ using System.Security.Cryptography;
 
 namespace Cryptography_POC.Services
 {
-    public class AesCryptoConfiguration : ICryptoConfiguration
+    public class RijndaelCryptoConfiguration : ICryptoConfiguration
     {
-        public AesCryptoConfiguration(string password, int keySize, int iterations, int blockSize, int saltLength)
+        public RijndaelCryptoConfiguration(string password, int keySize, int iterations, int blockSize, int saltLength)
         {
             using (var aes = new AesManaged())
             {

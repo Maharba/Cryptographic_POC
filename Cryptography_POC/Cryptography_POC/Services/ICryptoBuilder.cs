@@ -4,7 +4,7 @@ namespace Cryptography_POC.Services
 {
     public interface ICryptoBuilder
     {
-        ICryptoBuilder SetCryptoConfiguration(AesCryptoConfiguration aesCryptoConfiguration);
+        ICryptoBuilder SetCryptoConfiguration(ICryptoConfiguration config);
         ICryptoBuilder SetCryptoResponse(Action<CryptoStatus> callback);
         ICryptoPerformer Build();
     }

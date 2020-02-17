@@ -4,30 +4,36 @@ namespace Cryptography_POC.Services
 {
     public class CryptoBuilder : ICryptoBuilder
     {
-        public CryptoBuilder(ICryptoStarter cryptoStarter)
+        public CryptoBuilder(ICryptoPlatform cryptoPlatform)
         {
-            
+            CryptoPerformer.Instance.CryptoPlatform = cryptoPlatform;
         }
         
-        public ICryptoBuilder SetCryptoConfiguration(AesCryptoConfiguration aesCryptoConfiguration)
+        public ICryptoBuilder SetCryptoConfiguration(ICryptoConfiguration config)
         {
-            throw new NotImplementedException();
+            CryptoPerformer.Instance.CryptoConfiguration = config;
+            return this;
         }
 
         public ICryptoBuilder SetCryptoResponse(Action<CryptoStatus> callback)
         {
-            throw new NotImplementedException();
+            CryptoPerformer.Instance.CryptoResponse = callback;
+            return this;
         }
 
         public ICryptoPerformer Build()
         {
-            throw new NotImplementedException();
+            if (CryptoPerformer.Instance.CryptoConfiguration == null)
+            {
+                throw new ArgumentException("ICryptoBuilder requires to call method SetConfiguration before Build method");
+            }
+            return CryptoPerformer.Instance;
         }
     }
 
     public class CryptoStatus
     {
-        private ResponseType Response { get; set; }
+        public ResponseType Response { get; set; }
     }
 
     public enum ResponseType

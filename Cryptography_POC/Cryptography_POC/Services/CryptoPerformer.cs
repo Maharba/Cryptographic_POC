@@ -5,7 +5,7 @@ namespace Cryptography_POC.Services
     public class CryptoPerformer : ICryptoPerformer, ICryptoCallBacks
     {
         private static CryptoPerformer _instance;
-        private static object _syncRoot;
+        private static object _syncRoot = new object();
         
         private CryptoPerformer() {}
         
@@ -31,7 +31,7 @@ namespace Cryptography_POC.Services
             }
         }
         
-        public void Encrypt()
+        public byte[] Encrypt(byte[] data)
         {
             if (CryptoConfiguration == null)
             {
@@ -43,10 +43,10 @@ namespace Cryptography_POC.Services
                 throw new ArgumentNullException();
             }
             
-            CryptoPlatform.Encrypt(CryptoConfiguration);
+            return CryptoPlatform.Encrypt(data, CryptoConfiguration);
         }
 
-        public void Decrypt()
+        public byte[] Decrypt(byte[] data)
         {
             if (CryptoConfiguration == null)
             {
@@ -58,7 +58,7 @@ namespace Cryptography_POC.Services
                 throw new ArgumentNullException();
             }
             
-            CryptoPlatform.Decrypt(CryptoConfiguration);
+            return CryptoPlatform.Decrypt(data, CryptoConfiguration);
         }
 
         public Action<CryptoStatus> CryptoResponse { get; set; }

@@ -190,18 +190,24 @@ namespace Cryptography_POC.ViewModels
             DownloadImageCommand = new Command(DownloadImage);
             OpenFileCommand = new Command(OpenFile);
             BitSelectedCommand = new Command<string>(BitSelected);
+
+            if (!Xamarin.Essentials.Preferences.ContainsKey("FirstLaunch"))
+            {
+                Xamarin.Essentials.Preferences.Set("FirstLaunch", true);
+                //TODO: Prompt user to enter password (cold start) and generate ICryptoConfiguration to cache it.
+            }
         }
 
         private void EncryptFile()
         {
             if (IsEncrypted)
             {
-                _cryptoFileService.DecryptFile(FilePath, PasswordText);
+                _cryptoFileService.DecryptFile(FilePath);
                 CryptoButtonText = "Encrypt File";
             }
             else
             {
-                _cryptoFileService.EncryptFile(FilePath, PasswordText, BitSizes.Bit256, BitSizes.Bit128, 32, Iterations );
+                _cryptoFileService.EncryptFile(FilePath, PasswordText, 256, 128, 256, Iterations );
                 CryptoButtonText = "Decrypt File";
             }
 
